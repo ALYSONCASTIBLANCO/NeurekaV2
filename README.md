@@ -1,4 +1,4 @@
-# Astra Child Theme
+# NeurekaGS Astra Child Theme
 
 Este es el tema hijo para NeurekaGS, con esto trabajaremos todo el frontend desde Astra.
 
