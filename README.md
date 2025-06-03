@@ -14,7 +14,7 @@ wp-content/
   ├── .gitignore
   └── README.md
 
-##✅ ¿Qué incluimos en el repo?
+## ✅ ¿Qué incluimos en el repo?
 
 Sí se incluye:
 
