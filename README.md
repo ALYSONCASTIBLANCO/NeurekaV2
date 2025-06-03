@@ -57,7 +57,7 @@ Reutilizar plantillas en cualquier instalación local
 
 ## 🤖 ¿Cómo usar las plantillas en WordPress?
 
-Hacer git pull para traer la última versión del repo.
+**Hacer git pull  _de la rama main por supuesto_ para traer la última versión del repo.**
 
 Entrar al panel de WordPress:
 
@@ -75,8 +75,8 @@ Exporta la plantilla desde Elementor como .json.
 
 Guarda el archivo en la carpeta elementor-templates/ del repo.
 
-Hace git add, commit y push con ese archivo.
+**Hace git add, commit y push con ese archivo. _¡OJO! Recuerda no tocar la rama main, esa rama solo la toca la Ms._**
 
-Los demás pueden hacer git pull e importar esa plantilla en su WP local.
+**Los demás pueden hacer git pull _de la rama main por supuesto_ e importar esa plantilla en su WP local.**
 
 # 🚀 Ready to build!
