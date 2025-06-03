@@ -4,7 +4,9 @@
 
 ## 📆 Estructura del proyecto (repo en /wp-content/)
 
-<pre> ``` wp-content/ ├── themes/ │ └── mi-tema-hijo/ ← Tema hijo personalizado (basado en Astra) ├── plugins/ │ └── nuestros-plugins/ ← Plugins propios (si usamos alguno) ├── uploads/ ← Ignorado (archivos multimedia) ├── elementor-templates/ ← Plantillas .json exportadas desde Elementor ├── .gitignore └── README.md ``` </pre>
+``` 
+wp-content/ ├── themes/ │ └── mi-tema-hijo/ ← Tema hijo personalizado (basado en Astra) ├── plugins/ │ └── nuestros-plugins/ ← Plugins propios (si usamos alguno) ├── uploads/ ← Ignorado (archivos multimedia) ├── elementor-templates/ ← Plantillas .json exportadas desde Elementor ├── .gitignore └── README.md
+```
 
 ## ✅ ¿Qué incluimos en el repo?
 
