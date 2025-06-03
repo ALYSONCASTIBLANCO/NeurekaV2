@@ -7,7 +7,7 @@
 ```
 wp-content/
 ├── themes/
-│   └── mi-tema-hijo/            ← Tema hijo personalizado (basado en Astra)
+│   └── astra-child/            ← Tema hijo personalizado (basado en Astra)
 ├── plugins/
 │   └── nuestros-plugins/        ← Plugins propios (si usamos alguno)
 ├── uploads/                     ← Ignorado (archivos multimedia)
@@ -18,7 +18,7 @@ wp-content/
 
 ## ✅ ¿Qué incluimos en el repo?
 
-Sí se incluye:
+### Sí se incluye:
 
 El tema hijo (código, estilos, funciones personalizadas)
 
@@ -28,7 +28,7 @@ Plantillas .json exportadas desde Elementor
 
 Archivos de configuración del proyecto
 
-## No se incluye:
+### No se incluye:
 
 Elementor ni otros plugins descargables (se instalan desde el panel de WP)
 
@@ -40,10 +40,12 @@ Archivos temporales o de caché
 
 Es una carpeta para guardar plantillas de diseño creadas con Elementor y exportadas en formato .json:
 
+```
 elementor-templates/
   ├── home.json        ← Página de inicio
   ├── login.json       ← Página de login
   └── contacto.json    ← Página de contacto
+```
 
 ## Esto permite:
 
