@@ -61,7 +61,7 @@ Hacer git pull para traer la última versión del repo.
 
 Entrar al panel de WordPress:
 
-** Ir a _Elementor > Plantillas > Importar plantilla_ **
+**Ir a _Elementor > Plantillas > Importar plantilla_**
 
 Elegir el archivo .json correspondiente (ej. home.json)
 
