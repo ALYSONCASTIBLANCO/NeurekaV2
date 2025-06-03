@@ -1,0 +1,93 @@
+# ----------------------------
+# Ignorar medios y caché
+# ----------------------------
+uploads/
+*.log
+*.tmp
+*.cache
+*.bak
+*.zip
+*.tar
+*.gz
+*.rar
+
+# ----------------------------
+# Archivos de sistema (Windows, macOS)
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------
+# Archivos de configuración local
+# ----------------------------
+.env
+wp-config.php
+wp-config-local.php
+local-config.php
+
+# ----------------------------
+# Node y dependencias (por si usás npm en el tema)
+# ----------------------------
+node_modules/
+package-lock.json
+yarn.lock
+
+# ----------------------------
+# Composer
+# ----------------------------
+vendor/
+composer.lock
+
+# ----------------------------
+# Archivos de editores
+# ----------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------
+# Elementor backups (opcional)
+# ----------------------------
+*.json-backup
+
+# ----------------------------
+# Ignorar carpetas de builds
+# ----------------------------
+dist/
+build/
+*.min.js
+*.min.css
+
+# ----------------------------
+# Carpeta oculta de Git (por seguridad si se copia)
+# ----------------------------
+.git/
+
+# ----------------------------
+# Archivos del sistema y temporales de WordPress
+# ----------------------------
+*.swp
+*.swo
+*.orig
+# Carpetas de WordPress temporales
+upgrade/
+upgrade-temp-backup/
+
+# Subcarpetas de plugins externos (opcional)
+plugins/akismet/
+plugins/classic-editor/
+# (Solo deja tus propios plugins o usa excepciones si querés algo puntual)
+
+# Por si usás Elementor
+*.json-backup
+
+# Evitar el repo Git dentro del wp-content si se copiara
+.git/
+# Ignorar Elementor y otros plugins que se instalan desde el panel
+plugins/elementor/
+plugins/elementor-pro/
+
+#Ignorar Astra
+themes/astra

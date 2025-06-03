@@ -1,0 +1,5 @@
+# Ignorar carpetas de WordPress core
+../../../wp-config.php
+../../../wp-content/uploads/
+../../../node_modules/
+.DS_Store

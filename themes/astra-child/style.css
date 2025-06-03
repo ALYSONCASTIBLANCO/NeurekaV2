@@ -1,0 +1,40 @@
+/*
+Theme Name: Astra Child
+Template: astra
+Version: 1.0
+Author: Tu nombre
+*/
+
+/* Estilos personalizados */
+
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #f0f4ff;
+  border-radius: 20px;
+}
+
+.features {
+  text-align: center;
+}
+
+.feature-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.feature-box {
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: scale(1.05);
+}
