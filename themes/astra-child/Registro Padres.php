@@ -3,7 +3,6 @@
 Template Name: Parent Register
 */
 ?>
-
 <!DOCTYPE html>
 <html lang="en; es;">
 <head>
@@ -13,13 +12,13 @@ Template Name: Parent Register
     <title>Padres | Neureka GS</title>
 </head>
 
-<body style="margin:0; font-family:Helvetica; background:#f9f9fb; position:relative; min-height:100vh;">
-    <section style="display:flex; justify-content:center; align-items:center; padding:3rem; position:relative; min-height: calc(100vh - 80px);">
-    <div class="registro-conteiner">
-        <div style="width:420px; background:#fff; padding:2rem 2.5rem; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.05); z-index:2;">
-          <h2 style="text-align:center; margin-bottom:1.5rem;">Registrarse</h2>
+<body>
+    <div class="container">
+      <div class="form-container">
+        <div class="central-form" style=" width:400px; margin:0; height:450px; display:flex; justify-content: center; align-items: center; font-family: Helvetica; background:#f9f9fb; padding:2rem 2.5rem; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.05); z-index:2;">
+
           <form method="post" action="">
-            
+            <h2 style="text-align:center; margin-bottom:1.5rem;">Registrarse</h2>
             <div style="margin-bottom:1rem;">
               <label style="font-weight:bold; display:block; margin-bottom:0.3rem;">Nombre del acudiente</label>
               <div style="display:flex; align-items:center;">
@@ -60,69 +59,35 @@ Template Name: Parent Register
                 <input type="password" name="user_password" placeholder="Entra tu contraseña" required style="flex:1; padding:10px; border-radius:10px; border:1px solid #ddd;">
               </div>
             </div>
-    
+
             <div class="checkbox-group">
               <label><input type="checkbox"> Recuérdame</label>
               <label><input type="checkbox" name="aceptar_terminos"><a href="https://genuinecreators.com/privacy-policy/"> Acepta los términos y condiciones</a></label>
             </div>
+
+
+            <style>
+              .checkbox-group {
+                display: flex;
+                gap: 2rem;
+                align-items: center;
+                margin-top: 1rem;
+                accent-color: #a78bfa;
+              }
+
+              .checkbox-group label {
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                accent-color: #a78bfa;
+              }
+            </style>
             
-           <style>
-            .checkbox-group {
-              display: flex;
-              gap: 2rem; 
-              align-items: center;
-              margin-top: 1rem;
-              accent-color: #a78bfa;
-            }
-
-            .checkbox-group label {
-              display: flex;
-              align-items: center;
-              font-size: 14px;
-              accent-color: #a78bfa;
-            }
-
-           </style>
-          </div>
-
-           <style>
-           /* Pantallas grandes (desktop) */
-           @media (min-width: 1025px) {
-               .registro-container {
-                   display: flex;
-                   justify-content: center;
-                   align-items: center;
-                   gap: 50px;
-               }
-           
-               .rodolfito {
-                   display: block;
-                   max-width: 250px;
-                   height: auto;
-               }
-           }
-           
-           /* Pantallas pequeñas (celulares) */
-           @media (max-width: 1024px) {
-               .rodolfito {
-                   display: none;
-               }
-           
-               .registro-container {
-                   display: flex;
-                   justify-content: center;
-                   align-items: center;
-               }
-           }
-
-          </style>
-
-            <hr style="border: none; height: 1px; background: #eee; margin-bottom: 1rem;">
+                 <hr style="border: none; height: 1px; background: #eee; margin-bottom: 1rem;">
             <button type="submit"name="registro_submit" style="background:#d6c6ff; width:100%; padding:12px; border:none; border-radius:10px; font-weight:bold; color:#000; cursor:pointer;">¡Unirse!</button>
           </form>
-        </div>
-
-                      <?php
+    </div> 
+     <?php
           if (isset($_POST['registro_submit'])) {
           if (!isset($_POST['aceptar_terminos'])) {
         echo '<p style="color:red;">Debes aceptar los términos y condiciones para registrarte.</p>';
@@ -172,10 +137,93 @@ Template Name: Parent Register
         }
       }
         ?>
+    </div>
+   
+    <div class="rodolfo">
+          <img src="https://i.imghippo.com/files/trDj5110eSU.png" alt="Rodolfo">
+        </div>
 
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rodolfito-lateral.png" alt="Rodolfito" style="position: absolute; right: 200px; z-index: 1;" class="rodolfito">
+    <style>
+        .container{
+            display: flex;
+            align-items: center;
+            /*padding: 15px;*/
+            gap: 15px;   
+        }
 
-      </section>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            padding: 30px;
+            border-radius: 15px;
+            /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+            flex-grow: 1;
+            flex-basis: 63%;
+        }
+
+       .central-form {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         padding: 2.5rem 3rem;
+         position: relative;
+         transition: 0.3s ease;
+        }   
+
+        .central-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rodolfo {
+            flex-grow: 1;
+            flex-basis: 15%;
+            justify-content: right;
+            overflow: hidden;
+        }
+
+        .rodolfo img {
+            object-fit: cover;
+            object-position: right center;
+        }
+
+        /* ===== Tablets y pantallas medianas ===== */
+          @media (max-width: 1024px) {
+            .container {
+              gap: 20px;
+            }
+
+            .form-container {
+              max-width: 350px;
+              /* formulario más pequeño */
+              width: 80%;
+            }
+        }
+
+         /* ===== Celulares ===== */
+          @media (max-width: 768px) {
+            .container {
+              flex-direction: column;
+              /* form arriba */
+            }
+
+            .form-container {
+              max-width: 85%;
+              /* ocupa más ancho en cel */
+            }
+
+            .rodolfo {
+              display: none;
+              /* desaparece Rodolfo */
+            }
+          }
+    </style>
+
+   </section>
     
 </body>
 </html>

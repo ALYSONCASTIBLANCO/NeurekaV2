@@ -19,15 +19,15 @@ get_header();
       color: #333;
     }
 
- 
-    header {
+/*Comento esto porque esta afectando el header principal de Astra, por eso se ve asi*/ 
+   /*header {
       background-color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #ddd;
-    }
+    }*/
 
     .logo {
       display: flex;

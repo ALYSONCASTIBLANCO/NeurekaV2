@@ -20,9 +20,15 @@ get_header();
         color: inherit;
     }
     .page-content {
-        position: relative;
-        min-height: 100vh;
-        padding: 40px 0;
+        /*Quite esta parte porque necesitabamos insertar una imagen. Con posicion relativa, la modificacion se hace imposible*/
+        /*position: relative;*/
+        display: flex;
+        /*Tambien quite esta porte porque el min-height hace que se estire mas el contenedor del login*/
+        /*min-height: 100vh;*/
+        padding: 10px 0;
+        /*Inserte un gap para que se separen los elementos (la imagen y el login)*/
+        gap: 30px;
+        font-family: Helvetica;
     }
     .login-container {
         width: 380px;
@@ -30,8 +36,9 @@ get_header();
         background: #FFFFFF;
         border-radius: 30px;
         box-shadow: 0px 4px 9px rgba(23, 26, 31, 0.11), 0px 0px 2px rgba(23, 26, 31, 0.12);
-        margin-left: calc(50% + 150px);
-        transform: translateX(-50%);
+        /*Quite esta parte tambien porque al tener control desde el display flex, no es necesario acomodar contenido de esta manera.*/
+        /*margin-left: calc(50% + 150px);*/
+        /*transform: translateX(-50%);*/
     }
     .login-form {
         width: 100%;
@@ -45,7 +52,7 @@ get_header();
         height: 38px;
         padding-left: 16px;
         padding-right: 16px;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Helvetica';
         font-size: 15px;
         line-height: 24px;
         font-weight: 400;
@@ -166,7 +173,7 @@ get_header();
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Helvetica';
         font-size: 16px;
         line-height: 24px;
         font-weight: 400;
@@ -207,19 +214,27 @@ get_header();
         margin-bottom: 6px;
         font-size: 14px;
     }
+    /*Anadi esta media query que se usa para que cuando la pantalla sea de 750px o menos, la imagen desaparezca y solo se vea el formulario.*/ 
+    @media(max-width: 750px){
+        .login-image{
+            display: none;}
+        .page-content{
+            justify-content: center;
+        }
+    }
 </style>
 
 <div class="page-content">
     <div class="login-container">
         <div class="login-form">
-            <h3>¡Estas de vuelta!</h3>
+            <h3><b>¡Estas de vuelta!</b></h3>
             <form method="POST" action="" >
                 <div class="form-group">
-                    <label for="username">Apodo o Correo Electrónico</label>
+                    <label for="username"><b>Apodo o Correo Electrónico</b></label>
                     <input type="text" id="username-emailaddress" name="user_login" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
+                    <label for="password"><b>Contraseña</b></label>
                     <div class="password-field-container">
                         <input type="password" id="password" name="user_password" required>
                         <button type="button" class="password-toggle" onclick="togglePassword()">
@@ -244,6 +259,9 @@ get_header();
                 <a href="https://genuinecreators.com/role-options/">Regístrate ahora</a>
             </div>
         </div>
+    </div>
+    <div class="login-image">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/rodolfito_login.png" alt="Rodolfito">
     </div>
 </div>
 

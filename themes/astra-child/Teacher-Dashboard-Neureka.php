@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Dashboard Page
+Template Name: Teacher Dashboard 
 */
  
 get_header();
@@ -114,166 +114,98 @@ else {
     $next_level = $levels[1];
     $progress_percent = 0;
 }
-?> 
-
-</DOCTYPE html>
-
-<html lan="es"> 
+?>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Dashboard - Neureka GS</title>
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Dashboard - Neureka GS</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+ <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web/src/regular/style.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
 
- 
-    <style>
+  <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      /*This margin creates conflicts with the header.*/
-      /*margin: 150px;*/
-      padding: 20px;
+      font-family: "Open Sans", sans-serif;
+      background-color: #f7f7fb;
+      margin: 0;
       color: #333;
     }
-    .dashboard{
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        margin-top: 50px;
-    }
-    p{
-        margin-bottom: 0;
-    }
-    h1 {
-      font-size: 30px;
-      margin-bottom: 4px;
+    
+    .welcome{
+        display: block;
     }
 
-    .subtext {
-      color: #777;
-      font-size: 16px;
-      margin-bottom: 40px;
+    .welcome h1 {
+      margin-bottom: 30px;
+      font-weight: 600;
     }
 
-    .stats {
+    .categories {
+      width: 70vw;
+      margin-left: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .class-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+
+    .class-header {
       display: flex;
-      gap: 20px;
-      margin-bottom: 25px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
-      /*I will comment this line because this flex is affecting the cards proportion*/
-      flex: 0.25;
-      display: flex;
+      gap: 10px;
       align-items: center;
-      padding: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px 20px;
+      cursor: pointer;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+      border-radius: 12px;
     }
 
-    .text {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centers 22 + label */
-    text-align: center;
+    #class-header h2 {
+        margin: 0;
+        text-align: left;
     }
 
-
-    .card img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 10px;
-      flex-shrink: 0;
-
+    .class-header span {
+      font-size: 16px;
+      font-weight: 600;
     }
 
-    #streak-icon {
-      width: 30%;
-      height: 82%;
-      margin-right: 10%;
-      margin-left: 10%;
+    .class-content {
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      padding: 40px;
     }
 
-    #points-icon {
-      width: 20%;
-      height: 60%;
-      margin-right: 20%;
-      margin-left: 10%;
+    .class-add-student {
+      padding: 30px 300px;
+      display: none;
+      
     }
-
-    #achievements-icon {
-      width: 30%;
-      height: 88%;
-      margin-right: 10%;
-      margin-left: 10%;
-    }
-    .card h2 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .card p {
-      margin: 5px 0 0;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .section {
-      margin-bottom: 50px;
+    
+    .pancracio-main-div {
+    
     }
   
-    .expandable-section {
-      padding-left: 2%;
-      margin-top: 1%;
-      margin-bottom: 2%;
-    }
-
-    .section h3 {
-      font-size: 25px;
-      margin-bottom: 10px;
-    }
-
-    .progress-bar {
-      background: #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      height: 20px;
-      margin: 10px 0;
-      margin-right: 58%;
-      margin-bottom: 2em;
-    }
-
-    .progress {
-      background: linear-gradient(90deg, #9a6eff, #b9a7ff);
-      width: <?php echo $progress_percent; ?>%;
-      height: 100%;
-    }
-
-    .account-box {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .account-box p {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-        
     .little-title{
         font-size: 18px;
-        font-weight: 100;
+        font-weight: 1000;
     }
 
     .little-text{
@@ -281,8 +213,7 @@ else {
     }
 
     .add-button {
-        /*text-align: center;*/
-        margin-bottom: 2em;
+        text-align: center;
     }
 
     .add-button button{
@@ -295,45 +226,136 @@ else {
         border: none;
         cursor: pointer;
         transition: background-color 0.2s ease, transform 0.1s ease;
-    
-    </style>
+        margin-bottom: 20px;
+    }
 
+    .class-add-student form{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    }
+
+    .class-add-student form input[type=text]{
+      width: 20vw;
+      height: 30px;
+      border-radius: 10px;
+      border: none;
+      background-color: #E8E8E8;
+    }
+
+    .class-add-student form input[type="text"]:focus{
+      border: 1px solid gray;
+    }
+
+    .class-add-student form input[type=submit]{
+        font-size: 18px;
+        font-weight: 30;
+        color: #331bcc;
+        background-color: #C9C5F6;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+        background-color: #bdb8ff; /* a bit darker on hover */
+        transform: translateY(-2px); /* subtle lift effect */
+    }
+
+    button:active {
+        transform: translateY(0); /* resets lift when clicked */
+    }
+
+    .class-card.active .class-header .caret {
+      transform: rotate(180deg);
+    }
+
+    .student {
+      margin-bottom: 15px;
+    }
+    /*New section added, for the progress:*/
+    .expandable-section {
+      padding-left: 2%;
+      margin-top: 1%;
+      margin-bottom: 2%;
+    }
+
+
+    .progress-bar {
+      height: 10px;
+      background-color: #e4e4f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .progress {
+    width: <?php echo $progress_percent; ?>%;;
+      height: 100%;
+      background-color: #b9a9ff;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .actions i {
+      font-size: 18px;
+      color: #666;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .actions i:hover {
+      color: #5f48ff;
+    }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="dashboard">
-        <h1>Hello, <?php echo $usr_name ?></h1>
-  <p class="subtext">🔑 Student Unique Code: <?php echo $student_code ?></p>
+<div class="pancracio-main-div">
+  <div class="welcome">
+    <h1>Hello, Mr(s). <?php echo $usr_name ?></h1>
+  </div>
 
-  <div class="stats">
-      
-  <!-- <div class="card">
-    <img id="streak-icon" src="
-    /media/fire-streak-icon.svg" alt="streak">
-    <div class="text">
-      <h2>7</h2>
-      <p>Day Streak</p>
-    </div> --> 
-    
-  <div class="card">
-    <img id="points-icon" src="<?php echo get_stylesheet_directory_uri(); ?>/media/point-star-point.png" alt="points">
-    <div class="text">
-      <h2><?php echo $points_total ?></h2>
-      <p>Points</p>
-    </div>
-  </div>
-  <div class="card">
-    <img id="achievements-icon" src="<?php echo get_stylesheet_directory_uri(); ?>/media/achievement-icon.png" alt="achievements">
-    <div class="text">
-      <h2><?php echo $achievements ?></h2>
-      <p>Achievements</p>
-    </div>
-  </div>
-</div>
-  
-    <div class="section">
-    <h3>Your Progress</h3>
-    
+  <div class="categories">
+    <div class="class-card">
+      <div class="class-header">
+        <i class="ph-bold ph-student"></i>
+        <h2 #class-header-title >Your Students</h2>
+      </div>
+
+      <div class="class-content">
+        <!--Your Students-->
+            <p>No students yet.</p>
+          </div>
+                  <div class="add-button">
+                <button onclick="toggleClass()">Add Student
+                </button>
+        </div>
+        <div class="class-add-student" id="AddStudent">
+            <p class="little-text" >Application in development ;) 🔨</p> 
+            <form action="" method="post">
+            <input type="text" name="students" id="students">
+            <input type="submit" value="Add" class="button">
+            </form>
+        </div>
+        </div>
+
+ <!-- closes class-content -->
+   <!-- closes class-card -->
+
+  <div class="class-card"> <!--Play Yourself Card-->
+      <div class="class-header">
+        <i class="ph ph-puzzle-piece"></i>
+        <h2 #class-header-title >Play Yourself ;)</h2>
+      </div>
+          <div class="class-content">
             <div class="expandable-section">
                 <?php if ($latest_activity): 
                 $h5p_latest_url=get_permalink($levels[$completed_level_index]['post_id']) ;
@@ -343,7 +365,7 @@ else {
                 </div>
                 <p class="little-title">Current Level:</p>
                 <p class="little-text"><?php echo $latest_activity->title; ?></p>
-                <div class="progress-bar"><div class="progress"><?php echo $progress_percent; ?>%</div></div>
+                <div class="progress-bar"><div class="progress"></div></div>
                 <?php endif; ?>
          
                 <?php if ($next_level):
@@ -361,20 +383,34 @@ else {
                 <p>¡Felicidades! Has completado todos los niveles disponibles.</p>
                 <?php endif; ?>
             </div>            
-     
-  </div>
-
-  <div class="section">
-    <h3>Account Information</h3>
-    <div class="account-box">
-      <p><strong>User Name:</strong> <?php echo $usr_name ?></p>
-      <p><strong>Email: </strong> <?php echo $user_mail ?></p>
-      <p><strong>Student Unique Code: </strong> <?php echo $student_code ?></p>
+          </div>
+        </div>
+    <div class="class-card"> <!--Account Information-->
+    <div class="class-header">
+        <i class="ph-bold ph-caret-down caret"></i>
+        <h2 #class-header-title >Account Information</h2>
     </div>
-  </div>
-</div>
 
-</div> <!-- End of the dashboard div --> 
+    <div class="class-content">
+            <p>User Name: <?php echo $usr_name ?></p>
+            <p>Email: <?php echo $user_mail ?></p>
+          </div>
+        </div>
+          </div> <!-- closes categories -->
+    </div>
+
+    <script>
+      function toggleClass() {
+      var AddStudent = document.getElementById("AddStudent");
+        if (AddStudent.style.display === "none") {
+        AddStudent.style.display = "block";
+        } else {
+      AddStudent.style.display = "none";
+      }
+      }
+
+    </script>
+
 </body>
-</html>
 
+</html>
