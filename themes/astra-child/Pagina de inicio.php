@@ -5,52 +5,73 @@ Template Name: Homepage
 
 get_header();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Neureka GS</title>
-    <link rel="icon" type="image/png" href="<?php echo get_stylesheet_directory_uri(); ?>/media/Avion-lateral-derecha.png" />
-    <link rel="stylesheet" href="Pantalla de opciones.html">
-</head>
-
-<body>
-  <div class="container-fluid">
-    <section class="centro"
-     style="display: flex; justify-content: center; align-items: center;height: 80vh;">
-
-  <div class="left -images">
-    <div style="display: flex; align-items: center; gap: 20px;">
-      <div id= "Rodolfito"><img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rodolfo-1.png" alt="Rodolfito" style="width: 200px;"></div>
-      <div id= "Pancracio"><img src="<?php echo get_stylesheet_directory_uri(); ?>/media/astronauta.png" alt="Astronauta" style="width: 288px;"></div>
-      <div id= "Sandy"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Gato-espacial.png" alt="Sandy" style="width: 288px;"></div>
-  </div>
-</div>
-  <div class="right-content">
-    <div style="margin-left: 50px;">
-     <h1>¡Inclusión,<br> diversión y <br> aprendizaje!</h1>
-     <p>¿Qué más podemos pedir?</p>
-     <a href="https://genuinecreators.com/role-options/" class="join-btn">
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Avion-lateral-derecha.png" alt="Avión" class="btn-icon1">
-      ¡Únete Ahora!
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Avion-lateral-izquierda.png" alt = "Avión" class="btn-icon2 ">
-    </a>
-  </div>
- 
-    <style>
-      .left-images {
-        display: flex;
-        flex-direction: row; 
-        align-items: flex-start;
-        gap: 100px;
-       margin-right: 2rem;
+<style>
+      .title{
+       color: #1C256A;
+       text-align: center;
+       font-size: 2.2rem;
+       font-weight: bold;
+       padding-top: 50px;
+       margin-bottom: 0.5rem;
+       
       }
 
-      .left-images img {
-       width: 150px;
-     }
+      .left-images {
+        flex: 1;
+        /*Ocupa espacio proporcional, ¿Que quierede decir? */ 
+        margin-right: 2rem;
+        /*Esto separa del lado derecho por que es una margen que separa cosas*/
+      }
+
+      .parent {
+        display: grid;
+        /* Usamos 6 columnas para poder centrar perfectamente 2 elementos debajo de 3 */
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px 10px;
+        justify-items: center;
+        align-items: end;
+      }
+
+      .character-card {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .character-card img {
+        width: 160px; /* Ajustado para mejor visualización */
+        height: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .character-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .character-card h4 {
+        margin: 10px 0 0 0;
+        color: #1C256A;
+        font-size: 1.3rem;
+        font-weight: 550;
+      }
+
+      .character-card p {
+        margin: 0;
+        color: #9DA7BB; /* Color grisáceo/azulado suave para el subtítulo */
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      /* Posicionamiento en el Grid */
+      /* Fila 1: 3 elementos */
+      .Rodolfito { grid-column: 1 / span 2; grid-row: 1; } /*Estos jerogrificos son que empieza en columna 1 y ocupa 2 columnas*/ 
+      .Pancracio { grid-column: 3 / span 2; grid-row: 1; }
+      .Sandy     { grid-column: 5 / span 2; grid-row: 1; }
+
+      /* Fila 2: 2 elementos centrados (ocupan las columnas centrales de sus respectivos huecos) */
+      .Solecito  { grid-column: 2 / span 2; grid-row: 2; }
+      .Rene      { grid-column: 4 / span 2; grid-row: 2; }
 
       body {
        font-family: 'Helvetica', sans-serif;
@@ -63,13 +84,14 @@ get_header();
        font-size: 2.2rem;
        font-weight: bold;
        margin-bottom: 0.5rem;
+       color: #1C256A;
       }
         
       .right-content p {
          font-size: 1.1rem;
          margin-bottom: 1.5rem;
-         font-weight: bold;
-         color: black;
+         font-weight: lighter;
+         color: #1C256A;
         }
 
       .join-btn {
@@ -182,113 +204,196 @@ get_header();
     width: 100%;
   }
 }
-    </style>
+.important-stuff{
+  text-align:center;
+}
+.description b {
+  color:#8094f4
+  font-weight: 700;
+  background: hsla(175, 64%, 76%, 0.15);
+  padding: 2px 6px;
+  border-radius: 6px;;
+}
+.parent2{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px 20px;
+  justify-items: center;  
+}
 
+ .card{
+ background-color: #EDEAFB; /* más suave como mockup */
+  width: 260px;
+  min-height: 300px;
+  border-radius: 20px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /*Animación*/ 
+}
+
+ .sub-title{
+  color:#1C256A;
+  font-weight: bold;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+   .card p {
+        margin: 0;
+        color: #6B7280; 
+        font-size: 0.85rem; /* más pequeño*/
+        line-height: 1.3;
+      }
+.card img{
+   width: 150px;
+  height: auto;
+  align-self: center;
+  margin-top: 10px;
+
+}
+
+.cards{
+    margin:25px;
+}
+
+    /* Posicionamiento en el Grid */
+      /* Fila 1: 3 elementos */
+      .Rodolfito { grid-column: 1 / span 2; grid-row: 1; } /* grid-column: dice dónde empieza y hasta donde llega en columnas izquierda-> derecha*/ 
+      .Pancracio { grid-column: 3 / span 2; grid-row: 1; }/*span: Columnas a ocupar, siendo mas flexible - tamaño-*/
+      .Sandy     { grid-column: 5 / span 2; grid-row: 1; }/*grid-row: Lo mismo del grid-column pero en veritical, arriba -> abajo*/
+
+      /* Fila 2: 2 elementos centrados (ocupan las columnas centrales de sus respectivos huecos) */
+      .Solecito  { grid-column: 2 / span 2; grid-row: 2; }
+      .Rene      { grid-column: 4 / span 2; grid-row: 2; }
+    </style>
+    
+  <div class="container-fluid">
+    <section class="centro"
+     style="display: flex; justify-content: space-between; align-items: center;height: 80vh; padding: 0.5%">
+     <div class="left-images">
+    <div>
+      <h1 class= "title">Conoce a nuestros amigos</h1>
+    </div>
+   <div class="parent">
+    <div class="character-card Rodolfito">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rodolfo.png" alt="Rodolfo">
+      <div class="description">
+        <h4>Rodolfo</h4>
+        <p>TDAH</p>
+      </div>
+    </div>
+    
+    <div class="character-card Pancracio">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Pancracio.png" alt="Pancracio">
+      <div class="description">
+        <h4>Pancracio</h4>
+        <p>Autista</p>
+      </div>
+    </div>
+    
+    <div class="character-card Sandy">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Sandy.png" alt="Sandy">
+      <div class="description">
+        <h4>Sandy</h4>
+        <p>Sensorial</p>
+      </div>
+    </div>
+    
+    <div class="character-card Solecito">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Solecito.png" alt="Solecito">
+      <div class="description">
+        <h4>Solecito</h4>
+        <p>Dislexia</p>
+      </div>
+    </div>
+    
+    <div class="character-card Rene">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rene.png" alt="Rene">
+      <div class="description">
+        <h4>Rene</h4>
+        <p>Bipolar</p>
+      </div>
+    </div>
+   </div>     
+ </div>
+
+  <div class="right-content" style="color: #1C256A;">
+    <div style="margin-left: 50px;">
+     <h1>¡Inclusión,<br> diversión y <br> aprendizaje!</h1>
+     <p>¿Qué más podemos pedir?</p>
+     <a href="https://genuinecreators.com/role-options/" class="join-btn">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Avion-lateral-derecha.png" alt="Avión" class="btn-icon1">
+      ¡Únete Ahora!
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Avion-lateral-izquierda.png" alt = "Avión" class="btn-icon2 ">
+    </a>
+  </div>
   </div>
   </section>
-  </section>
   <section class="about_us">
-    <style>
-      .about_us{
-        background-color: white;
-        position: relative;
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
-        border-radius: 24px;
-        padding: 40px;
-        /*box-shadow: -4px 12px 52px -1px rgba(112,112,112,0.38);
-        //-webkit-box-shadow: -4px 12px 52px -1px rgba(112,112,112,0.38);
-        -moz-box-shadow: -4px 12px 52px -1px rgba(112,112,112,0.38);*/
-      }
-      .col-1, .col-2, .col-3 {
-        position: relative;
-        margin-right: 20px;
-      }
-      .col-1, .col-2{
-        padding-right: 10px;
-        border-right: 1px #79c1f3 solid;
-      }
-      .col-1 h3, .col-2 h3, .col-3 h3{
-        text-align: center;
-        font-weight: bold;
-      }
-      .col-1 p, .col-2 p, .col-3 p{
-        text-align: justify;
-      }
-      .pancracio{
-        position: absolute;
-        right: 80%;
-        height: 20%;
-        bottom: 0;
-      }
-      .pancracio img{
-        width: auto;
-        height: 100%;
-      }
-      .sandy{
-        position: absolute;
-        bottom: 0;
-        right: 55%;
-        height: 15%;
-      }
-      .sandy img{
-        width: auto;
-        height: 100%;
-      }
-      .rodolfo{
-        position: absolute;
-        bottom: 0;
-        left: 65%;
-        height: 15%;
-      }
-      .rodolfo img{
-        width: auto;
-        height: 100%;
-      }
-      @media (max-width: 992px) {
-        .sandy, .rodolfo, .pancracio{
-          display: none;
-        }
-        .about_us{
-          display: flex;
-          flex-direction: column;
-        }
-        .col-1, .col-2{
-        border-right: 0;
-        border-bottom: 1px #79c1f3 solid;
-      }
-      }
-    </style>
-      <div class="col-1">
-        <h3>Nuestra vision</h3>
-        <br>
-        <p>Incluir a las personas neurodivergentes en un proceso educativo mas adaptable para todos. 
-Al final, ¡Todos somos diferentes!</p>
-      </div>
-      <div class="col-2">
-        <h3> A traves de : </h3>
-        <br>
-        <p><em style="color: #99CF15">Rodolfo- El alien- :</em> Con (TDAH). Por eso es tan activo, ya que no puede quedarse quieto. 
-          Está aquí para aprender en su forma.</p>
-        <p><em style="color: #79c1f3">Pancracio - El astronauta- :</em> Con primer de autismo, es algo tímido para expresar sus ideas 
-          y tiene dificultades para socializar. Junto con sus amigos intenta superar esa barrera. 
-          Por eso también está aquí: romper  barreras.</p>
-        <p><em style="color: #8094f3">Sandy - La gata astronauta- :</em> Con trastorno del procesamiento sensorial, con sus 5 sentidos 
-          sensibles al mundo, se proteje  en su traje de astronauta, y sus amigos la acompañan para incluirla. 
-          Por que su condicion no tiene que  aislarla.</p>
-      </div>
-      <div class="col-3">
-        <h3> Objetivo: </h3>
-        <br>
-        <p> Romper el modelo único de las aulas tradicionales que no se adaptan a 
-          mentes inquietas y creativas.</p>
-        <p>Alineandonos con los ODS 4 —Educación de Calidad— y 10 —Reducción de Desigualdades—, 
+   <div class="center-text">
+        <div class= "important-stuff">
+         <h2 class="title" >Objetivo:</h2>
+         <br>
+         <p>Romper el modelo único de las aulas tradicionales que no se adaptan a 
+          mentes inquietas y creativas. <b>Alineandonos con los ODS 4 —Educación de Calidad— y 10 —Reducción de Desigualdades—</b>, 
           demostrando que las herramientas tecnológicas pueden ser profundamente humanas y para todos.</p>
+          <h2 class="title">Nuestra Vision: </h2>
+          <br>
+          <p> Incluir a las personas neurodivergentes en un proceso educativo mas adaptable para todos. Al final,<b> ¡Todos somos diferentes!. </b></p>
+       </div>
       </div>
-      <div class="pancracio"><img src="<?php echo get_stylesheet_directory_uri(); ?>/media/pancracio_about_us.jpeg" alt="Pancracio"/></div>
-      <div class="sandy"><img src="<?php echo get_stylesheet_directory_uri(); ?>/media/sandy_about_us.png" alt="Sandy"/></div>
-      <div class="rodolfo"><img src="<?php echo get_stylesheet_directory_uri(); ?>/media/rodolfo_about_us.png" alt="Rodolfo"/></div>
-  </section>
-
-</body>
-</html>
+</section>
+<section class="cards"> 
+        <h3 class= "title"> A traves de : </h3>
+        <br>
+       <div class="parent2">
+        <div class="card Rodolfito">
+         <div class="description">
+           <h5 class="sub-title">Rodolfo-El alien:</h5>
+           <p>Con <b>(TDAH)</b>. Es hiperactivo, muy pocas veces se queda quieto; aún asi, siempre se preocupa por sus amigos,acompañandolos en todo momento.</p>
+         </div>
+         <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rodolfo.png" alt="Rodolfo">
+        </div>
+    
+        <div class="card Pancracio">
+         <h5 class="sub-title">Pancracio-El austronauta:</h5>
+         <div class="description">
+           <p>Con <b>(TEA 1)</b>. Le dificulta expresarse, pero junto a sus amigos aprendera a aceptarse y no ver eso como una desventaja, sino como un don.</p>
+         </div>
+         <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Pancracio.png" alt="Pancracio">
+      </div>  
+    
+    <div class="card Sandy">
+     <div class="description">
+        <h5 class="sub-title">Sandy-La gata espacial:</h5>
+        <p>Con <b>(TPA)</b>, sensible al mundo, se proteje en su traje de astronauta; sus amigos la acompañan, por que su condicion no tiene que aislarla.</p>
+      </div>
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Sandy.png" alt="Sandy">
+    </div>
+    
+    <div class="card Solecito">
+    <div class="description">
+        <h5 class="sub-title">Solecito-La Pájarita espacial:</h5>
+        <p>Con <b>dislexia</b> se le dificulta comprender, específicamente lo académico, está aprendendiendo que su autenticidad no la definen los demás. </p>
+       </div>
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Solecito.png" alt="Solecito">
+    </div>
+    
+    <div class="card Rene">
+    <div class="description">
+        <h5 class="sub-title">Rene-El sapo volador:</h5>
+        <p>Con <b>bipolaridad</b>, nunca baja del platillo, viajando entre galaxias de emociones. Sus cambios no son una debilidad, le permite ver la realidad desde múltiples perspectivas.</p>
+      </div>
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rene.png" alt="Rene">
+    </div>
+   </div>     
+</section>
+      
+  <?php get_footer(); ?>

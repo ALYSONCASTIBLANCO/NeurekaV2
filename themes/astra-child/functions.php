@@ -138,19 +138,266 @@ function identify_roles() {
 }
 add_action('template_redirect', 'identify_roles');
 
-//Function to enqueue the information from the API. It's important to avoid security breaches.
-function neureka_enqueue_frontend_scripts() {
-    wp_enqueue_script(
-        'neurekags-frontend',
-        get_stylesheet_directory_uri() . '/js/neurekags-frontend.js',
-        [], // dependencies (we are not using)
-        '1.0',
-        true
-    );
- 
-    wp_localize_script( 'neurekags-frontend', 'NeurekaGS', [
-        'rest_url' => esc_url_raw( rest_url() ),
-        'nonce'    => wp_create_nonce( 'wp_rest' ),
-    ] ); 
+require_once get_stylesheet_directory() . '/Includes/rest-api-neurekag.php';
+
+function script_inyector_h5p() {
+?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Buscamos TODOS los iframes de H5P en la página
+    var allIframes = document.querySelectorAll(".h5p-iframe");
+    
+    allIframes.forEach(function(iframe) {
+        
+        // Función para inyectar el estilo
+        var injectStyles = function(targetIframe) {
+            try {
+                var style = targetIframe.contentDocument.createElement("style");
+                style.textContent = `
+                
+
+                    .media-screen .media-screen-buttons-wrapper .media-screen-button button {
+                        background-color: #857a8f !important; /* tu morado de las cartas */
+                        color: #ecd8ff !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                        padding: 12px 32px !important;
+                        font-size: 16px !important;
+                        font-family: 'your-pixel-font', monospace !important; /* la fuente de Neureka */
+                        cursor: pointer !important;
+                        transition: background-color 0.2s !important;
+                    }
+                    
+                    .media-screen .media-screen-buttons-wrapper .media-screen-button button: hover{
+                        background-color: #746a7d !important;
+                    }
+                    
+                    
+                    .media-screen-introduction {
+                        margin-bottom: 20px !important;
+                        width: 90% !important;
+                        text-align: center !important;
+                    }
+                    
+                    .media-screen-bar {
+                        display: none !important;
+                    }
+                   
+                   .h5p-alternative-container {
+                        background-color: #d8cfed !important;
+                        border: 2px solid #d1d9e6 !important;
+                        border-radius: 12px !important;
+                        margin-bottom: 25px !important;
+                       
+                   }
+                   
+                   .h5p-game-map-exercise-instance.h5p-image {
+                        weight: auto !important;
+                        height: 300px !important;
+                   }
+                   
+                   .h5p-game-map-overlay-dialog-content {
+                        padding: 16px !important;
+                        color: black !important;
+                        font-size: 1.1em !importat;
+                        line-height: 1.65 !important;
+                        background-color: #f5f0ff !important;
+                        
+                   }
+                   
+                   .h5p-question-introduction {
+                        font-size: 1.1em !importat;
+                        line-height: 1.65 !important;
+                        color: #3d3660 !important;
+                        margin-bottom: 18px !important;
+                        max-width: 480px !important;
+                   }
+                   
+                   .h5p-answers {
+                        background: #faf9ff !important;
+                        border: 1.5px solid #ddd8fb !important;
+                        border-radius: 12px !important;
+                        padding: 10px 14px !important;
+                        transition: all 0.15s ease !important;
+                        cursor: pointer !important;
+                   }
+                   
+                    .h5p-memory-game > ul {
+                        display: grid !important;
+                        grid-template-columns: repeat(2, 1fr) !important;
+                        gap: 16px !important;
+                        padding: 0 !important;
+                        margin: 0 auto !important;
+                        max-width: 700px !important;
+                        list-style: none !important;
+                    }
+
+                    .h5p-memory-game > ul > li {
+                        height: 250px !important;
+                        margin: 0 !important;
+                    }
+
+                    .h5p-memory-game div.h5p-memory-card {
+                        width: 100% !important;
+                        height: 100% !important;
+                        min-width: unset !important;
+                        min-height: unset !important;
+                    }
+
+                    .h5p-memory-game .h5p-front,
+                    .h5p-memory-game .h5p-back {
+                        width: 100% !important;
+                        height: 100% !important;
+                    }
+                    
+                    .h5p-memory-game .h5p-back {
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        width: 100% !important;
+                        height: 100% !important;
+                        overflow: hidden !important;
+                    }
+
+                    .h5p-memory-game .h5p-back img {
+                        width: auto !important;
+                        height: 100% !important;
+                        max-width: 100% !important;
+                        object-fit: contain !important;
+                    }
+                    
+                    .h5p-joubelui-button.h5p-question-check-answer {
+                        background-color: #857a8f !important;
+                        color: #ecd8ff !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                        padding: 12px 32px !important;
+                        font-size: 16px !important;
+                        cursor: pointer !important;
+                        transition: background-color 0.2s !important;
+                        font-family: 'your-pixel-font', monospace !important;
+                    }
+
+                    .h5p-joubelui-button.h5p-question-check-answer:hover {
+                        background-color: #746a7d !important;
+                    }
+                    
+                    .h5p-joubelui-button.h5p-game-map-exercise-instance-continue-button {
+                        background-color: #857a8f !important; /* tu morado de las cartas */
+                        color: #ecd8ff !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                        padding: 12px 32px !important;
+                        font-size: 16px !important;
+                        font-family: 'your-pixel-font', monospace !important; 
+                        cursor: pointer !important;
+                        transition: background-color 0.2s !important;
+                    }
+
+                    .h5p-joubelui-button.h5p-game-map-exercise-instance-continue-button:hover {
+                        background-color: #746a7d !important; 
+                    }
+                    
+                    .h5p-game-map-toolbar-tool-bar {
+                        background-color: #c8c3e8 !important; /* lavanda del fondo */
+                        border-radius: 12px !important;
+                        padding: 10px 20px !important;
+                        font-family: inherit !important;
+                        color: #2d2a6e !important; /* azul oscuro del diseño */
+                    }
+
+                    /* Título "Comandante" */
+                    .toolbar-headline {
+                        font-weight: 800 !important;
+                        color: #2d2a6e !important;
+                        font-size: 18px !important;
+                    }
+
+                    /* Contenedores de stats */
+                    .status-container {
+                        background-color: #ffffff88 !important;
+                        border-radius: 8px !important;
+                        padding: 4px 10px !important;
+                        color: #2d2a6e !important;
+                        font-weight: 600 !important;
+                    }
+
+                    /* Botón Finish */
+                    .toolbar-button-finish {
+                        background-color: #5c52b5 !important;
+                        color: #ffffff !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                        padding: 8px 20px !important;
+                        font-weight: 700 !important;
+                        font-size: 14px !important;
+                        cursor: pointer !important;
+                        
+                    }
+                    .toolbar-button-finish:hover {
+                        background-color: #857a8f !important;
+                    }
+                    
+                    .toolbar-button-fullscreen {
+                        display: none !important;
+                    }
+                    
+                    
+                    .ui-draggable.ui-draggable-handle {
+                        background-color: #857a8f !important;
+                        color: #ecd8ff !important;
+                        border: none !important;
+                        -radius: 8px !important;
+                    }
+
+                    .ui-draggable.ui-draggable-disabled {
+                        background-color: #857a8f !important;
+                        color: #ecd8ff !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                    }
+                    
+                    .h5p-drag-dropzone {
+                        border: 2px dashed #857a8f !important;
+                        border-radius: 8px !important;
+                        background-color: #f5f0ff !important;
+                    }
+                    
+                    .h5p-joubelui-button.h5p-question-game-map-continue {
+                        background-color: #857a8f !important;
+                        color: #ecd8ff !important;
+                        border: none !important;
+                        border-radius: 8px !important;
+                        padding: 12px 32px !important;
+                        font-size: 16px !important;
+                        cursor: pointer !important;
+                        transition: background-color 0.2s !important;
+                    }
+
+                    .h5p-joubelui-button.h5p-question-game-map-continue:hover {
+                        background-color: #746a7d !important;
+                    }
+                   
+                `;
+                targetIframe.contentDocument.head.appendChild(style);
+            } catch (e) {
+                console.log("Esperando carga completa del nivel...");
+            }
+        };
+
+        // Si ya cargó, inyectamos de una vez
+        if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+            injectStyles(iframe);
+        }
+
+        // Por si tarda un poco en cargar el contenido del nivel
+        iframe.addEventListener("load", function() {
+            injectStyles(iframe);
+        });
+    });
+});
+</script>
+<?php
 }
-add_action( 'wp_enqueue_scripts', 'neureka_enqueue_frontend_scripts' );
+add_action('wp_footer', 'script_inyector_h5p');
+

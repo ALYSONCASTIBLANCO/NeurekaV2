@@ -2,25 +2,16 @@
 /*
 Template Name: Parent Register
 */
+get_header();
 ?>
-<!DOCTYPE html>
-<html lang="en; es;">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="Avión lateral derecha.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Padres | Neureka GS</title>
-</head>
-
-<body>
     <div class="container">
       <div class="form-container">
-        <div class="central-form" style=" width:400px; margin:0; height:450px; display:flex; justify-content: center; align-items: center; font-family: Helvetica; background:#f9f9fb; padding:2rem 2.5rem; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.05); z-index:2;">
+        <div class="central-form" style=" width:400px; margin:0; display:flex; justify-content: center; align-items: center; font-family: Helvetica; padding:2rem 2.5rem; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.05); z-index:2;">
 
           <form method="post" action="">
-            <h2 style="text-align:center; margin-bottom:1.5rem;">Registrarse</h2>
+            <h2 style="text-align:center; margin-bottom:1rem; margin-top: 5px">Regístrerse</h2>
             <div style="margin-bottom:1rem;">
-              <label style="font-weight:bold; display:block; margin-bottom:0.3rem;">Nombre del acudiente</label>
+              <label style="font-weight:bold; display:block; margin-bottom:1rem;">Nombre del acudiente</label>
               <div style="display:flex; align-items:center;">
                 <span style="margin-right:8px;">👥</span>
                 <input type="text" name="user_login" placeholder="Entra tu nombre" required style="flex:1; padding:10px; border-radius:10px; border:1px solid #ddd;">
@@ -83,10 +74,118 @@ Template Name: Parent Register
               }
             </style>
             
-                 <hr style="border: none; height: 1px; background: #eee; margin-bottom: 1rem;">
+                 <hr style="border: none; height: 1px; background: #FFFFF2; margin-bottom: 1rem;">
             <button type="submit"name="registro_submit" style="background:#d6c6ff; width:100%; padding:12px; border:none; border-radius:10px; font-weight:bold; color:#000; cursor:pointer;">¡Unirse!</button>
           </form>
     </div> 
+    
+    </div>
+   
+     <div class="rodolfo">
+      <div>
+          <h1 class="gradienttext" style="text-align:center; margin-top: 1rem">¡Hola Padre!</h1>
+    </div>
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Sandy.png"
+  alt="Rodolfo">
+        </div>
+
+    <style>
+        .site {
+  background: #fffff2;
+}
+        .container{
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            /*Este padding es el que genera esa brecha blanca con respecto a Rodolfo. Se la he comentado.*/
+            /*padding: 15px;*/
+            gap: 15px;   
+        }
+
+        .gradienttext{
+         background: #A8A8F5;
+background: linear-gradient(90deg,rgba(168, 168, 245, 1) 35%, rgba(190, 235, 229, 1) 73%);
+         -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+         font-weight: 700;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            padding: 30px;
+            border-radius: 15px;
+            /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+            flex-grow: 1;
+            flex-basis: 63%;
+            margin-top: 10px;
+        }
+
+       .central-form {
+        color: #681dff !important;
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+         padding: 2.5rem 3rem;
+         position: relative;
+         transition: 0.3s ease;
+         background: #BEEBE5;
+background: linear-gradient(0deg,rgba(190, 235, 229, 1) 42%, rgba(168, 168, 245, 1) 96%);
+        }   
+
+        .central-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rodolfo {
+            flex-grow: 1;
+            flex-basis: 15%;
+            justify-content: right;
+            overflow: hidden;
+        }
+
+        .rodolfo img {
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        /* ===== Tablets y pantallas medianas ===== */
+          @media (max-width: 1024px) {
+            .container {
+              gap: 20px;
+            }
+
+            .form-container {
+              max-width: 350px;
+              /* formulario más pequeño */
+              width: 80%;
+            }
+        }
+
+         /* ===== Celulares ===== */
+          @media (max-width: 768px) {
+            .container {
+              flex-direction: column;
+              /* form arriba */
+            }
+
+            .form-container {
+              max-width: 85%;
+              /* ocupa más ancho en cel */
+            }
+
+            .rodolfo {
+              display: none;
+              /* desaparece Rodolfo */
+            }
+          }
+
+    </style>
      <?php
           if (isset($_POST['registro_submit'])) {
           if (!isset($_POST['aceptar_terminos'])) {
@@ -137,93 +236,4 @@ Template Name: Parent Register
         }
       }
         ?>
-    </div>
-   
-    <div class="rodolfo">
-          <img src="https://i.imghippo.com/files/trDj5110eSU.png" alt="Rodolfo">
-        </div>
-
-    <style>
-        .container{
-            display: flex;
-            align-items: center;
-            /*padding: 15px;*/
-            gap: 15px;   
-        }
-
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: transparent;
-            padding: 30px;
-            border-radius: 15px;
-            /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
-            flex-grow: 1;
-            flex-basis: 63%;
-        }
-
-       .central-form {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         padding: 2.5rem 3rem;
-         position: relative;
-         transition: 0.3s ease;
-        }   
-
-        .central-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .rodolfo {
-            flex-grow: 1;
-            flex-basis: 15%;
-            justify-content: right;
-            overflow: hidden;
-        }
-
-        .rodolfo img {
-            object-fit: cover;
-            object-position: right center;
-        }
-
-        /* ===== Tablets y pantallas medianas ===== */
-          @media (max-width: 1024px) {
-            .container {
-              gap: 20px;
-            }
-
-            .form-container {
-              max-width: 350px;
-              /* formulario más pequeño */
-              width: 80%;
-            }
-        }
-
-         /* ===== Celulares ===== */
-          @media (max-width: 768px) {
-            .container {
-              flex-direction: column;
-              /* form arriba */
-            }
-
-            .form-container {
-              max-width: 85%;
-              /* ocupa más ancho en cel */
-            }
-
-            .rodolfo {
-              display: none;
-              /* desaparece Rodolfo */
-            }
-          }
-    </style>
-
-   </section>
-    
-</body>
-</html>
+    <?php get_footer(); ?>

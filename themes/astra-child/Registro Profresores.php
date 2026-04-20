@@ -2,24 +2,14 @@
 /*
 Template Name: Teacher Register
 */
+get_header();
 ?>
-
-<!DOCTYPE html>
-<html lang="en; es;">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="Avión lateral derecha.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Profes | Neureka GS</title>
-</head>
-
-<body>
-    <div class="container">
+    <div class="container" style="background: #fffff2">
       <div class="form-container">
-        <div class="central-form" style=" width:400px; margin:0; height:450px; display:flex; justify-content: center; align-items: center; font-family: Helvetica; background:#f9f9fb; padding:2rem 2.5rem; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.05); z-index:2;">
+        <div class="central-form" style=" width:400px; margin:0; display:flex; justify-content: center; align-items: center; font-family: Helvetica; padding:2rem 2.5rem; border-radius:20px; box-shadow:0 0 15px rgba(0,0,0,0.05); z-index:2;">
 
           <form method="post" action="">
-            <h2 style="text-align:center; margin-bottom:1.5rem;">Registrarse</h2>
+            <h2 style="text-align:center; margin-bottom:1.5rem;">Regístrerse</h2>
             <div style="margin-bottom:1rem;">
               <label style="font-weight:bold; display:block; margin-bottom:0.3rem;">Nombre</label>
               <div style="display:flex; align-items:center;">
@@ -87,45 +77,34 @@ Template Name: Teacher Register
             <button type="submit" name="registro_submit" style="background:#d6c6ff; width:100%; padding:12px; border:none; border-radius:10px; font-weight:bold; color:#000; cursor:pointer;">¡Unirse!</button>
           </form> 
     </div> 
-      <?php
-          if (isset($_POST['registro_submit'])) {
-          if (!isset($_POST['aceptar_terminos'])) {
-        echo '<p style="color:red;">Debes aceptar los términos y condiciones para registrarte.</p>';
-        return; // Detiene la ejecución antes de crear el usuario
-        }
-            $userdata = array(
-        'user_login' => sanitize_user($_POST['user_login']),
-        // 'user_area' => sanitize_text_field($_POST['user_area']),'user_organization' => sanitize_text_field($_POST['user_organization']),//
-        'user_pass'  => $_POST['user_password'],
-        'user_email' => sanitize_email($_POST['user_email']),
-        'role' => 'um_tutor', // Asigna el rol de profesor
-            );
-
-        $user_id = wp_insert_user($userdata);
-        $perfil_url = um_user_profile_url($user->ID);
-        if (is_wp_error($user_id)) {
-        echo '<p>Error: ' . $user_id->get_error_message() . '</p>';
-        } else {                 // Guardar extras como user_meta
-        update_user_meta($user_id, 'area', sanitize_text_field($_POST['user_area']));
-        update_user_meta($user_id, 'organization', sanitize_text_field($_POST['user_organization']));
-        // Si quieres integrarlo con UM, disparas el hook de registro
-        do_action('um_after_user_register', $user_id, $userdata);
-        wp_redirect('/dashboard');
-        exit;
-        }
-      }
-        ?>
+      
     </div>
 
     <div class="rodolfo">
-          <img src="https://i.imghippo.com/files/trDj5110eSU.png" alt="Rodolfo">
+            <div>
+          <h1 class="gradienttext" style="text-align:center; margin-top: 1rem">¡Hola Profesor!</h1>
+    </div>
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Pancracio.png"
+  alt="Rodolfo">
         </div>
 
     <style>
+        .site {
+  background: #fffff2;
+}
+         .gradienttext{
+         background: #A8A8F5;
+background: linear-gradient(90deg,rgba(168, 168, 245, 1) 35%, rgba(190, 235, 229, 1) 73%);
+         -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+         font-weight: 700;
+        }
 
         .container{
+           margin-top: 50px;
             display: flex;
             align-items: center;
+            margin-top: 30px;
             /*padding: 15px;*/
             gap: 15px;   
         }
@@ -149,7 +128,9 @@ Template Name: Teacher Register
          padding: 2.5rem 3rem;
          position: relative;
          transition: 0.3s ease;
-        }   
+         background: #BEEBE5;
+background: linear-gradient(0deg,rgba(190, 235, 229, 1) 42%, rgba(168, 168, 245, 1) 96%);
+        } 
 
         .central-container {
             display: flex;
@@ -202,6 +183,32 @@ Template Name: Teacher Register
           }
 
     </style>
+    <?php
+          if (isset($_POST['registro_submit'])) {
+          if (!isset($_POST['aceptar_terminos'])) {
+        echo '<p style="color:red;">Debes aceptar los términos y condiciones para registrarte.</p>';
+        return; // Detiene la ejecución antes de crear el usuario
+        }
+            $userdata = array(
+        'user_login' => sanitize_user($_POST['user_login']),
+        // 'user_area' => sanitize_text_field($_POST['user_area']),'user_organization' => sanitize_text_field($_POST['user_organization']),//
+        'user_pass'  => $_POST['user_password'],
+        'user_email' => sanitize_email($_POST['user_email']),
+        'role' => 'um_tutor', // Asigna el rol de profesor
+            );
 
-</body>    
-</html> 
+        $user_id = wp_insert_user($userdata);
+        $perfil_url = um_user_profile_url($user->ID);
+        if (is_wp_error($user_id)) {
+        echo '<p>Error: ' . $user_id->get_error_message() . '</p>';
+        } else {                 // Guardar extras como user_meta
+        update_user_meta($user_id, 'area', sanitize_text_field($_POST['user_area']));
+        update_user_meta($user_id, 'organization', sanitize_text_field($_POST['user_organization']));
+        // Si quieres integrarlo con UM, disparas el hook de registro
+        do_action('um_after_user_register', $user_id, $userdata);
+        wp_redirect('/dashboard');
+        exit;
+        }
+      }
+        ?>
+    <?php get_footer(); ?>

@@ -33,7 +33,7 @@ get_header();
     .login-container {
         width: 380px;
         padding: 30px;
-        background: #FFFFFF;
+        background: linear-gradient(135deg, #7463e3, #bcfbff);
         border-radius: 30px;
         box-shadow: 0px 4px 9px rgba(23, 26, 31, 0.11), 0px 0px 2px rgba(23, 26, 31, 0.12);
         /*Quite esta parte tambien porque al tener control desde el display flex, no es necesario acomodar contenido de esta manera.*/
@@ -136,15 +136,17 @@ get_header();
         outline: none;
         box-shadow: 0 0 0 2px #C9C5F6;
     }
+    a {
+    text-decoration: none;
+    color: #403269;
+    }
+
     .forgot-password {
         font-size: 13px;
     }
     .forgot-password a {
-        color: #C9C5F6FF;
+        color: #e1dfff;
         text-decoration: none;
-    }
-    .forgot-password a:hover {
-        text-decoration: underline;
     }
     .register-link {
         margin-top: 20px;
@@ -154,14 +156,6 @@ get_header();
         align-items: center;
         justify-content: center;
         gap: 5px;
-    }
-    .register-link p {
-        margin: 0;
-        color: #666;
-    }
-    .register-link a {
-        color: #C9C5F6FF;
-        text-decoration: none;
     }
     .register-link a:hover {
         text-decoration: underline;
@@ -178,7 +172,7 @@ get_header();
         line-height: 24px;
         font-weight: 400;
         color: #FFFFFF;
-        background: #C9C5F6;
+        background: #2d2d2d;
         opacity: 1;
         border: none;
         border-radius: 16px;
@@ -191,11 +185,11 @@ get_header();
     }
     button[type="submit"]:hover {
         color: #FFFFFF;
-        background: #A59EF0;
+        background: #444353;
     }
     button[type="submit"]:hover:active {
         color: #FFFFFF;
-        background: #8076EA;
+        background: #444353;
     }
     button[type="submit"]:disabled {
         opacity: 0.4;
@@ -261,7 +255,7 @@ get_header();
         </div>
     </div>
     <div class="login-image">
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/rodolfito_login.png" alt="Rodolfito">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/media/Rodolfo.png" alt="Rodolfo">
     </div>
 </div>
 
@@ -314,3 +308,4 @@ if (isset($_POST['login_submit'])) {
         }
     }
 </script>
+<?php get_footer(); ?>

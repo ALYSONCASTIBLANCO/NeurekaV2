@@ -39,3 +39,13 @@ Author: Tu nombre
 .feature-box:hover {
   transform: scale(1.05);
 }
+/* Ocultar iconos sesión en mobile */
+.ast-header-break-point .ast-builder-html-element {
+    display: none !important;
+}
+
+/* Ocultar offcanvas en desktop */
+body:not(.ast-header-break-point) #kai-offcanvas,
+body:not(.ast-header-break-point) #kai-toggle {
+    display: none !important;
+}

@@ -1,144 +1,117 @@
+
 /**
-* Detect events in Interactive book
-*/
-// === JS para H5P Interactive Book + GamiPress (con corrección de errores) ===
+ * Detect events in H5P Game Map and award GamiPress achievements
+ */
 add_action('wp_footer', function () {
-   ?>
-   <script>
-        //jQuery es un servicio que me permite hacer peticiones a cualquier servidor
-        //para obtener informacion de ahi, es como una comunicacion entre el usuario
-        //y el sistema de WordPress.
-   jQuery(document).ready(function($){
-       // Mapeo libro title → achievement ID
-       const booksAchievements = {
-           'Easy Level': 74, // Libro 1 → Luna
-           'Intermediate Level': 79, // Libro 2 → Achievement libro 2
-			'Hard Level': 77,   
-           //3: 57  // Libro 3 → Achievement libro 3
-       };
-        //Esto es para iniciar la deteccion de los eventos. Si el tipo de pagina que
-        //se renderiza es de H5P, en el caso de los juegos y el servicio de eventos
-        //de H5P esta listo para ser escuchado, entonces comienza el proceso. Eso
-        //Evita que se ejecute en otros sitios de la plataforma que no nos interesan.
-       if (typeof H5P !== "undefined" && H5P.externalDispatcher) {
-            //Esta parte de aca es para que tome los datos de todo el libro, que tipo
-            //de libro es y que tiene adentro, y eso nos ayuda a saber cuantos ejercicios
-            //tiene el libro adentro.
-           for (const key in H5PIntegration.contents) {
-                //Guarda toda la informacion del libro aqui, asi podremos extraer todo
-                //lo que necesitemos.
-               const content = H5PIntegration.contents[key];
-                //Este console.log es para saber que esta imprimiendo cuando se ejecuta el libro. Me sirvio para saber las variables reales del documento.
-                console.log(content);
-               // Solo Interactive Books que estén en el mapeo. Aqui esta identificando
-               // si se refiere a un interactive book y si el titulo del book si esta
-               // dentro de la base de datos, quiere decir que el libro si existe y
-               // pueden ser leidos los eventos.
-               if (content.library.includes("H5P.InteractiveBook 1.11") && booksAchievements[content.title]) {
-                    //Aqui vamos a hacer que solo tome el titulo del libro, que
-                    //es lo que nos interesa.
-                   const targetAchievement = booksAchievements[content.title];
-                    //Vamos a crear una variable que guarde la cantidad de ejercicios del
-                    //libro.
-                   let total_max = 0;
-                    //Tambien vamos a crear una lista que permita guardar los puntajes
-                    //de cada intento del ejercicio.
-                   let chaptersScores = {};
-                    //Vamos a leer el contenido de la informacion del libro
-                   const bookData = JSON.parse(content.jsonContent);
-                    //Y solo vamos a tomar la cantidad de ejercicios dentro del libro.
-                   total_max = bookData.chapters.length;
+    ?>
+    <script>
+    jQuery(document).ready(function($){
+        // === CONFIGURACIÓN: Mapeo Título del Mapa → ID del Logro ===
+        const mapAchievements = {
+            'Aspirante': 74, 
+            'Explorador': 77,
+            'Especialista': 79,
+			'Comandante': 251,
+			'Maestro': 316, 
+		
+			
+        };
 
+        // Verificamos si H5P está cargado en la página
+        if (typeof H5P !== "undefined" && H5P.externalDispatcher) {
+            
+            for (const key in H5PIntegration.contents) {
+                const content = H5PIntegration.contents[key];
+                
+                // Filtramos por librería Game Map y si el título está en nuestra lista
+                if (content.library.includes("H5P.GameMap") && mapAchievements[content.title]) {
+                    
+                    const targetAchievement = mapAchievements[content.title];
+                    let total_stages = 0;
+                    let stagesScores = {};
 
-                   // Escuchar eventos xAPI
-                   H5P.externalDispatcher.on('xAPI', function(event){
-                       const st = event.data.statement;
-                        //Cuando un usuario hace clic en check, dispara un evento
-                        //answered, por eso, aqui lo capturamos.
-                       if(st.verb?.display?.['en-US'] === 'answered'){
-                            //Capturamos el id del ejercicio
-                           const chapterId = st.object.id;
-                            //Cuando el usuario responde bien, siempre arroja un 1
-                            //va a guardar ese puntaje en caso de que el usuario no
-                            //conteste bien, arroja un cero.
-                           const score = st.result?.score?.raw || 0;
+                    // Extraer la cantidad de nodos/etapas del mapa desde el JSON
+                    try {
+                        const gameData = JSON.parse(content.jsonContent);
+                        // Estructura específica de Game Map para contar etapas
+                        if (gameData.gameMap && gameData.gameMap.stages) {
+                            total_stages = gameData.gameMap.stages.length;
+                        }
+                    } catch (e) {
+                        console.error("Error al leer datos del Game Map:", e);
+                    }
 
+                    // Escuchar eventos xAPI (cuando el usuario interactúa con los nodos)
+                    H5P.externalDispatcher.on('xAPI', function(event){
+                        const st = event.data.statement;
+                        
+                        // Detectamos cuando una etapa es respondida o completada
+                        const verb = st.verb?.display?.['en-US'];
+                        if(verb === 'answered' || verb === 'completed'){
+                            
+                            const stageId = st.object.id;
+                            const score = st.result?.score?.raw || 0;
 
-                           // Guardar o actualizar puntaje si es mayor
-                           if(!chaptersScores[chapterId] || score > chaptersScores[chapterId]){
-                               chaptersScores[chapterId] = score;
-                           }
+                            // Guardamos el puntaje más alto obtenido en cada nodo
+                            if(!stagesScores[stageId] || score > stagesScores[stageId]){
+                                stagesScores[stageId] = score;
+                            }
 
+                            // Cálculo de progreso
+                            const total_raw = Object.values(stagesScores).reduce((a,b) => a + b, 0);
+                            const completed_count = Object.keys(stagesScores).length;
 
-                           // Recalcular total_raw
-                           const total_raw = Object.values(chaptersScores).reduce((a,b)=>a+b,0);
+                            // Si ya pasó por todas las etapas del mapa
+                            if(completed_count >= total_stages && total_stages > 0){
+                                const final_score = (total_raw / total_stages) * 100;
+                                
+                                console.log("➡️ Mapa:", content.title, "Puntaje final:", final_score);
 
-
-                           // Verificar si se respondieron todos los capítulos
-                           if(Object.keys(chaptersScores).length >= total_max){
-                                //Calcula el puntaje final dividiendo el total de
-                                //aciertos entre el total de ejercicios y lo multiplica
-                                //por 100.
-                               const final_score = (total_raw / total_max) * 100;
-                               console.log("➡️ El libro es:", content.title, "Puntaje final:", final_score);
-                                //Su aprueba con un puntaje mayor o igual a 70, se hace
-                                //la peticion al servidor y se manda la informacion de la
-                                //recompensa a Gamipress.
-                               if(final_score >= 70){
-                                   $.post('<?php echo admin_url("admin-ajax.php"); ?>', {
-                                       action: 'h5p_completed',
-                                       score: final_score,
-                                       achievement_id: targetAchievement
-                                   }, function(response){
-                                       console.log(response);
-                                   });
-                               }
-                           }
-                       }
-                   });
-               }
-           }
-       }
-   });
-   </script>
-   <?php
+                                // Si el promedio es >= 70, enviamos la petición a WordPress
+                                if(final_score >= 70){
+                                    $.post('<?php echo admin_url("admin-ajax.php"); ?>', {
+                                        action: 'h5p_map_completed',
+                                        score: final_score,
+                                        achievement_id: targetAchievement
+                                    }, function(response){
+                                        if(response.success) {
+                                            console.log("¡Logro asignado exitosamente!");
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+    </script>
+    <?php
 });
 
+/**
+ * Handler PHP para procesar el logro en GamiPress mediante AJAX
+ */
+add_action('wp_ajax_h5p_map_completed', function () {
+    if(!is_user_logged_in()){
+        wp_send_json_error("Usuario no logueado");
+    }
 
-// === Handler PHP para otorgar puntos y achievement en GamiPress ===
-add_action('wp_ajax_h5p_completed', function () {
-   if(!is_user_logged_in()){
-       wp_send_json_error("Usuario no logueado");
-   }
+    $user_id = get_current_user_id();
+    $score = floatval($_POST['score'] ?? 0);
+    $achievement_id = intval($_POST['achievement_id'] ?? 0);
 
-
-   $user_id = get_current_user_id();
-    //Se obtiene puntaje ganado por la persona.
-   $score = floatval($_POST['score'] ?? 0);
-    //Se obtiene el link del achievment que se gana con el libro correspondiente.
-    $achievement_id = strval($_POST['achievement_id'] ?? 0);
-
-
-   // Puntaje mínimo para otorgar achievement
-   if($score >= 70 && $achievement_id){
-       // Otorgar 10 puntos (puedes cambiar cantidad y tipo)
-       //gamipress_award_points_to_user($user_id, 10, 'punto');
-
-
-       // Otorgar achievement (usar ID numérico de tu achievement)
-       gamipress_award_achievement_to_user($achievement_id, $user_id);
-
-
-       wp_send_json_success("Puntos y achievement asignados");
-   } else {
-       wp_send_json_error("No alcanza el puntaje mínimo");
-   }
+    // Verificación final de seguridad y puntaje
+    if($score >= 70 && $achievement_id > 0){
+        // GamiPress otorga el logro al usuario
+        gamipress_award_achievement_to_user($achievement_id, $user_id);
+        wp_send_json_success("Logro otorgado correctamente.");
+    } else {
+        wp_send_json_error("Puntaje insuficiente o ID de logro inválido.");
+    }
 });
 
-
-// ========================
-// 3️⃣ Shortcode de desbloqueo por achievement
-// ========================
 function libro_bloqueado_shortcode($atts) {
     //Este shortcode lo que hace, es que recibe unos atributos cuando se inicializa, recibe tres cosas: el id del libro actual, el id del achievement que debe completar
     //previamente antes de seguir el nivel y un mensaje en caso de que no haya desbloqueado el achievement anterior.
